@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navidad Finkpital</title>
-    <link rel="icon" href="icono.png" type="image/png">
+    
+    <!-- Icono de la pestaña -->
+    <link rel="icon" href="images/icono.png" type="image/png">
     
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +16,7 @@
     <!-- Tailwind CSS (Framework de estilos) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuración personalizada de Tailwind para tus colores -->
+    <!-- Configuración de Colores y Fuentes -->
     <script>
         tailwind.config = {
             theme: {
@@ -32,68 +34,38 @@
         }
     </script>
 
-    <style>
-        /* Estilos base */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f4f6f8; /* Color de fondo ligero */
-            color: #333333;
-            /* Patrón de fondo sutil para el cuerpo (árboles/estrellas) simulado con CSS */
-            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        /* Animación del patrón del header */
-        @keyframes slideBackground {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
-        .header-pattern {
-            /* Aquí iría tu imagen: url('patron.png') */
-            /* Por ahora uso un gradiente para simularlo si no cargan la imagen */
-            background-image: url('patron.png'), linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
-            background-size: 50px 50px; /* Ajusta según el tamaño de tu patron.png */
-            animation: slideBackground 10s linear infinite;
-        }
-
-        /* Clases utilitarias de texto */
-        .text-body { font-weight: 400; }
-        .text-highlight { font-weight: 700; }
-        .text-heavy { font-weight: 800; }
-    </style>
+    <!-- Enlace a tu hoja de estilos externa -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen relative">
+    
+    <!-- Capa para el fondo navideño con opacidad -->
+    <div class="background-overlay"></div>
 
     <!-- HEADER -->
     <header class="relative bg-fink-purple h-48 md:h-64 flex items-center justify-center overflow-hidden">
         <!-- Capa del patrón animado -->
         <div class="absolute inset-0 header-pattern opacity-30"></div>
         
-        <!-- Logo -->
-        <div class="relative z-10 p-4">
-            <!-- Nota: Asegúrate de subir 'logofinkabco.png' a tu repo -->
-            <img src="logofinkabco.png" alt="Finkpital Logo" class="h-24 md:h-32 object-contain mx-auto" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block'">
-            
-            <!-- Fallback visual por si no está la imagen aún -->
-            <div id="alt-logo" class="hidden text-white text-4xl font-extrabold tracking-widest text-center">
-                <svg class="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg>
-                Finkpital
-            </div>
+        <!-- Logo Principal -->
+        <div class="relative z-10 p-4 w-full flex justify-center">
+            <img src="images/logofinkabco.png" alt="Finkpital Logo" class="h-24 md:h-32 object-contain" 
+                 onerror="console.log('Error: No se encuentra images/logofinkabco.png')">
         </div>
         
-        <!-- Decoración curva inferior (Opcional, estilo moderno) -->
-        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+        <!-- Decoración curva inferior -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none z-20">
             <svg class="relative block w-full h-[30px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" class="fill-[#f4f6f8]"></path>
+                <!-- Color coincidente con el fondo grisaceo -->
+                <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" fill="#e7eaeb"></path>
             </svg>
         </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-grow container mx-auto px-4 py-8 text-center max-w-2xl">
+    <main class="flex-grow container mx-auto px-4 py-8 text-center max-w-2xl relative z-10">
         
-        <!-- Saludo -->
+        <!-- Texto de Invitación -->
         <div class="mb-8">
             <p class="text-xl md:text-2xl text-fink-black mb-4">
                 🎄 Estás invitado a <span class="text-fink-green font-bold">nuestro gran convivio navideño Finkpital</span> 🎄
@@ -106,43 +78,55 @@
             </p>
         </div>
 
-        <!-- Cuenta Regresiva -->
+        <!-- Cuenta Regresiva (Con Segundos) -->
         <div class="mb-10">
             <p class="text-xl font-bold text-fink-black mb-4">Solo faltan:</p>
-            <div class="flex justify-center gap-4">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                
                 <!-- Días -->
                 <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-20 h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="days" class="text-4xl font-extrabold">00</span>
+                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <span id="days" class="text-2xl md:text-4xl font-extrabold">00</span>
                     </div>
-                    <span class="mt-2 font-bold text-fink-black">Días</span>
+                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Días</span>
                 </div>
+                
                 <!-- Horas -->
                 <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-20 h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="hours" class="text-4xl font-extrabold">00</span>
+                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <span id="hours" class="text-2xl md:text-4xl font-extrabold">00</span>
                     </div>
-                    <span class="mt-2 font-bold text-fink-black">Horas</span>
+                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Horas</span>
                 </div>
+                
                 <!-- Minutos -->
                 <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-20 h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="minutes" class="text-4xl font-extrabold">00</span>
+                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <span id="minutes" class="text-2xl md:text-4xl font-extrabold">00</span>
                     </div>
-                    <span class="mt-2 font-bold text-fink-black">Minutos</span>
+                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Minutos</span>
                 </div>
+
+                <!-- Segundos -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <span id="seconds" class="text-2xl md:text-4xl font-extrabold">00</span>
+                    </div>
+                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Segundos</span>
+                </div>
+
             </div>
         </div>
 
-        <!-- Ubicación -->
+        <!-- Ubicación y Mapa -->
         <div class="mb-8">
             <h2 class="text-3xl text-fink-green font-extrabold mb-2">Ubicación:</h2>
             <p class="text-fink-black text-lg mb-6">
                 Plaza Paseo Independencia Blvd. Las Quintas #50 Colonia, Quintas San Isidro, Torreón.
             </p>
             
-            <!-- Mapa -->
-            <div class="w-full rounded-xl overflow-hidden shadow-xl border-4 border-white mb-8">
+            <!-- Mapa embebido -->
+            <div class="w-full rounded-xl overflow-hidden shadow-xl border-4 border-white mb-8 bg-white">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.9288049264237!2d-103.41484129999999!3d25.574035300000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbfcc9027e75%3A0xb479075e388c5b8a!2sRinc%C3%B3n%20Silverio!5e0!3m2!1ses!2smx!4v1764105257733!5m2!1ses!2smx" 
                     width="100%" 
@@ -154,7 +138,7 @@
                 </iframe>
             </div>
 
-            <!-- Botón CTA -->
+            <!-- Botón de Confirmación -->
             <a href="https://wa.link/up0k82" target="_blank" class="inline-block bg-fink-purple text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg hover:bg-[#102d52] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 Confirmar asistencia
             </a>
@@ -163,37 +147,43 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-fink-purple text-white text-center py-6 px-4 text-sm mt-auto">
+    <footer class="bg-fink-purple text-white text-center py-6 px-4 text-sm mt-auto z-10 relative">
         <p>&copy; 2025 Finkpital. Trademarks and brands are the property of their respective owners.</p>
     </footer>
 
-    <!-- SCRIPT DE CUENTA REGRESIVA -->
+    <!-- LÓGICA DE LA CUENTA REGRESIVA -->
     <script>
-        // CONFIGURACIÓN DE FECHA: Viernes 19 de Diciembre de 2025
-        // Ajusta el año si es necesario (2024 o 2025)
+        // FECHA OBJETIVO: 19 de Diciembre de 2025 a las 14:00
         const targetDate = new Date("December 19, 2025 14:00:00").getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
-            // Cálculos de tiempo
+            // Cálculos matemáticos
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Mostrar resultados en los elementos con IDs
-            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            // Funciones auxiliares para actualizar el DOM
+            const updateElement = (id, value) => {
+                const el = document.getElementById(id);
+                if(el) el.innerHTML = value < 10 ? "0" + value : value;
+            };
 
-            // Si la cuenta termina
+            updateElement("days", days);
+            updateElement("hours", hours);
+            updateElement("minutes", minutes);
+            updateElement("seconds", seconds);
+
+            // Cuando la cuenta termina
             if (distance < 0) {
                 clearInterval(timer);
-                document.getElementById("days").innerHTML = "00";
-                document.getElementById("hours").innerHTML = "00";
-                document.getElementById("minutes").innerHTML = "00";
-                // Opcional: Mostrar mensaje de "¡Es hoy!"
+                ["days", "hours", "minutes", "seconds"].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = "00";
+                });
             }
         }, 1000);
     </script>
