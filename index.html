@@ -34,8 +34,40 @@
         }
     </script>
 
-    <!-- Enlace a tu hoja de estilos externa -->
+    <!-- Enlace a tu hoja de estilos general -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- ESTILOS CRÍTICOS PARA IMÁGENES (Solución al problema de rutas) -->
+    <style>
+        /* Animación para el patrón */
+        @keyframes slideBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        /* 1. Fondo de toda la página */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Ruta directa desde el HTML a la carpeta images */
+            background-image: url('images/fondo.png'); 
+            background-repeat: repeat;
+            opacity: 0.15; /* Baja opacidad para que no moleste al texto */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* 2. Patrón del Header */
+        .header-pattern {
+            /* Ruta directa desde el HTML a la carpeta images */
+            background-image: url('images/patron.png');
+            background-size: 50px 50px;
+            animation: slideBackground 10s linear infinite;
+        }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen relative">
     
