@@ -42,7 +42,7 @@
     <!-- Capa para el fondo navideño con opacidad -->
     <div class="background-overlay"></div>
 
-    <!-- HEADER -->
+    <!-- HEADER (Ahora rectangular sin la curva SVG) -->
     <header class="relative bg-fink-purple h-48 md:h-64 flex items-center justify-center overflow-hidden">
         <!-- Capa del patrón animado -->
         <div class="absolute inset-0 header-pattern opacity-30"></div>
@@ -51,14 +51,6 @@
         <div class="relative z-10 p-4 w-full flex justify-center">
             <img src="images/logofinkabco.png" alt="Finkpital Logo" class="h-24 md:h-32 object-contain" 
                  onerror="console.log('Error: No se encuentra images/logofinkabco.png')">
-        </div>
-        
-        <!-- Decoración curva inferior -->
-        <div class="absolute bottom-0 w-full overflow-hidden leading-none z-20">
-            <svg class="relative block w-full h-[30px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <!-- Color coincidente con el fondo grisaceo -->
-                <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" fill="#e7eaeb"></path>
-            </svg>
         </div>
     </header>
 
