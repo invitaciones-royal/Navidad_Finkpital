@@ -1,29 +1,45 @@
-/* Estilos base */
+/* Estilos Globales */
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f4f6f8; /* Color de fondo ligero */
+    background-color: #e7eaeb; /* Fondo Gris solicitado */
     color: #333333;
-    /* Patrón de fondo sutil para el cuerpo simulado con CSS puro */
-    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 20px 20px;
+    overflow-x: hidden; 
 }
 
-/* Animación del patrón del header */
+/* FONDO NAVIDEÑO (fondo.png)
+   Se usa una capa separada (overlay) para aplicar opacidad 
+*/
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* La ruta '../' sale de la carpeta css y entra a images */
+    background-image: url('../images/fondo.png'); 
+    
+    background-repeat: repeat; 
+    background-position: center top;
+    opacity: 0.15; 
+    z-index: 0; 
+    pointer-events: none; 
+}
+
+/* Animación del Patrón del Header */
 @keyframes slideBackground {
     0% { background-position: 0 0; }
     100% { background-position: 100px 100px; }
 }
 
 .header-pattern {
-    /* IMPORTANTE: La ruta '../images/' significa "salir de la carpeta css e ir a images"
-       Asegúrate de que 'patron.png' esté dentro de la carpeta 'images' 
-    */
-    background-image: url('../images/patron.png'), linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+    /* Patrón en el header */
+    background-image: url('../images/patron.png');
     background-size: 50px 50px; 
     animation: slideBackground 10s linear infinite;
 }
 
-/* Clases utilitarias de peso de fuente (si se necesitaran extra fuera de Tailwind) */
+/* Clases de utilidad */
 .text-body { font-weight: 400; }
 .text-highlight { font-weight: 700; }
 .text-heavy { font-weight: 800; }
