@@ -42,7 +42,7 @@
     <!-- Capa para el fondo navideño con opacidad -->
     <div class="background-overlay"></div>
 
-    <!-- HEADER (Ahora rectangular sin la curva SVG) -->
+    <!-- HEADER (Rectangular) -->
     <header class="relative bg-fink-purple h-48 md:h-64 flex items-center justify-center overflow-hidden">
         <!-- Capa del patrón animado -->
         <div class="absolute inset-0 header-pattern opacity-30"></div>
@@ -142,6 +142,17 @@
     <footer class="bg-fink-purple text-white text-center py-6 px-4 text-sm mt-auto z-10 relative">
         <p>&copy; 2025 Finkpital. Trademarks and brands are the property of their respective owners.</p>
     </footer>
+
+    <!-- BOTÓN FLOTANTE DE UBICACIÓN (VERDE) -->
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Rincon+Silverio%2C+Plaza+Paseo+Independencia%2C+Blvd.+Las+Quintas+50%2C+Quintas+San+Isidro%2C+Torreon" 
+       target="_blank" 
+       title="Cómo llegar"
+       class="fixed bottom-6 left-6 z-50 bg-fink-green text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:bg-[#8ab31b] transition-all duration-300 border-2 border-white">
+        <!-- Icono de Pin de Mapa -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+    </a>
 
     <!-- LÓGICA DE LA CUENTA REGRESIVA -->
     <script>
