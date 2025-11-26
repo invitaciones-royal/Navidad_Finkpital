@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navidad Finkpital</title>
-    
-    <!-- Icono de la pestaña -->
     <link rel="icon" href="images/icono.png" type="image/png">
     
     <!-- Google Fonts: Montserrat -->
@@ -13,212 +11,131 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (Framework de estilos) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para el icono del mapa y calendario -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Configuración de Colores y Fuentes -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'fink-purple': '#153b6c',
-                        'fink-green': '#9fc31c',
-                        'fink-black': '#333333',
-                    },
-                    fontFamily: {
-                        'montserrat': ['Montserrat', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Enlace a tu hoja de estilos general -->
+    <!-- CSS Externo -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- ESTILOS CRÍTICOS PARA IMÁGENES (Solución al problema de rutas) -->
+    <!-- Estilos específicos para imágenes -->
     <style>
-        /* Animación para el patrón */
-        @keyframes slideBackground {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
-        /* 1. Fondo de toda la página */
-        .background-overlay {
+        body::before {
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Ruta directa desde el HTML a la carpeta images */
-            background-image: url('images/fondo.png'); 
+            background-image: url('images/fondo.png');
             background-repeat: repeat;
-            opacity: 0.15; /* Baja opacidad para que no moleste al texto */
-            z-index: 0;
+            background-size: cover;
+            opacity: 0.15;
+            z-index: -1;
             pointer-events: none;
         }
 
-        /* 2. Patrón del Header */
-        .header-pattern {
-            /* Ruta directa desde el HTML a la carpeta images */
+        .header-bg {
             background-image: url('images/patron.png');
-            background-size: 50px 50px;
-            animation: slideBackground 10s linear infinite;
+            background-repeat: repeat;
+            animation: movePattern 20s linear infinite;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative">
-    
-    <!-- Capa para el fondo navideño con opacidad -->
-    <div class="background-overlay"></div>
+<body>
 
-    <!-- HEADER (Rectangular) -->
-    <header class="relative bg-fink-purple h-48 md:h-64 flex items-center justify-center overflow-hidden">
-        <!-- Capa del patrón animado -->
-        <div class="absolute inset-0 header-pattern opacity-30"></div>
-        
-        <!-- Logo Principal -->
-        <div class="relative z-10 p-4 w-full flex justify-center">
-            <img src="images/logofinkabco.png" alt="Finkpital Logo" class="h-24 md:h-32 object-contain" 
-                 onerror="console.log('Error: No se encuentra images/logofinkabco.png')">
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="logo-container">
+            <img src="images/logofinkabco.png" alt="Logo Finkpital" class="logo">
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-grow container mx-auto px-4 py-8 text-center max-w-2xl relative z-10">
+    <!-- Contenido Principal -->
+    <main class="container">
         
-        <!-- Texto de Invitación -->
-        <div class="mb-8">
-            <p class="text-xl md:text-2xl text-fink-black mb-4">
-                🎄 Estás invitado a <span class="text-fink-green font-bold">nuestro gran convivio navideño Finkpital</span> 🎄
-            </p>
-            <p class="text-lg text-fink-black mb-2">
-                Queremos celebrar juntos esta temporada especial.
-            </p>
-            <p class="text-lg text-fink-black">
-                Te invitamos a nuestro convivio navideño el <span class="text-fink-green font-bold">viernes 19 a las 2:00 p.m. en Rincón Silverio.</span>
-            </p>
-        </div>
+        <!-- Textos de Invitación -->
+        <section class="intro-text">
+            <p>🎄 Estás invitado a <span class="highlight">nuestro gran convivio navideño Finkpital</span> 🎄</p>
+            <p>Queremos celebrar juntos esta temporada especial.</p>
+            <p>Te invitamos a nuestro convivio navideño el <span class="highlight">viernes 19 a las 2:00 p.m. en Rincón Silverio.</span></p>
+        </section>
 
-        <!-- Cuenta Regresiva (Con Segundos) -->
-        <div class="mb-10">
-            <p class="text-xl font-bold text-fink-black mb-4">Solo faltan:</p>
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-                
-                <!-- Días -->
-                <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="days" class="text-2xl md:text-4xl font-extrabold">00</span>
-                    </div>
-                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Días</span>
-                </div>
-                
-                <!-- Horas -->
-                <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="hours" class="text-2xl md:text-4xl font-extrabold">00</span>
-                    </div>
-                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Horas</span>
-                </div>
-                
-                <!-- Minutos -->
-                <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="minutes" class="text-2xl md:text-4xl font-extrabold">00</span>
-                    </div>
-                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Minutos</span>
-                </div>
-
-                <!-- Segundos -->
-                <div class="flex flex-col items-center">
-                    <div class="bg-fink-green text-white w-16 h-20 md:w-20 md:h-24 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                        <span id="seconds" class="text-2xl md:text-4xl font-extrabold">00</span>
-                    </div>
-                    <span class="mt-2 text-sm md:text-base font-bold text-fink-black">Segundos</span>
-                </div>
-
+        <!-- Cuenta Regresiva -->
+        <section class="countdown-container">
+            <div class="countdown-box">
+                <span id="days" class="number">00</span>
+                <span class="label">Días</span>
             </div>
-        </div>
-
-        <!-- Ubicación y Mapa -->
-        <div class="mb-8">
-            <h2 class="text-3xl text-fink-green font-extrabold mb-2">Ubicación:</h2>
-            <p class="text-fink-black text-lg mb-6">
-                Plaza Paseo Independencia Blvd. Las Quintas #50 Colonia, Quintas San Isidro, Torreón.
-            </p>
-            
-            <!-- Mapa embebido -->
-            <div class="w-full rounded-xl overflow-hidden shadow-xl border-4 border-white mb-8 bg-white">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.9288049264237!2d-103.41484129999999!3d25.574035300000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbfcc9027e75%3A0xb479075e388c5b8a!2sRinc%C3%B3n%20Silverio!5e0!3m2!1ses!2smx!4v1764105257733!5m2!1ses!2smx" 
-                    width="100%" 
-                    height="350" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+            <div class="countdown-box">
+                <span id="hours" class="number">00</span>
+                <span class="label">Horas</span>
             </div>
+            <div class="countdown-box">
+                <span id="minutes" class="number">00</span>
+                <span class="label">Minutos</span>
+            </div>
+            <div class="countdown-box">
+                <span id="seconds" class="number">00</span>
+                <span class="label">Segundos</span>
+            </div>
+        </section>
 
-            <!-- Botón de Confirmación -->
-            <a href="https://wa.link/up0k82" target="_blank" class="inline-block bg-fink-purple text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg hover:bg-[#102d52] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                Confirmar asistencia
+        <!-- Botón Agregar al Calendario (NUEVO) -->
+        <div class="calendar-container">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Convivio+Navide%C3%B1o+Finkpital&dates=20251219T140000/20251219T190000&details=Gran+convivio+navide%C3%B1o+Finkpital%21+%C2%A1Te+esperamos%21&location=Rinc%C3%B3n+Silverio%2C+Plaza+Paseo+Independencia+Blvd.+Las+Quintas+%2350+Colonia%2C+Quintas+San+Isidro%2C+Torre%C3%B3n&ctz=America/Mexico_City" target="_blank" class="calendar-btn">
+                <i class="fa-regular fa-calendar-plus"></i> Agregar al calendario
             </a>
+        </div>
+
+        <!-- Ubicación -->
+        <section class="location-section">
+            <h2 class="location-title">Ubicación:</h2>
+            <p class="address">Plaza Paseo Independencia Blvd. Las Quintas #50 Colonia, Quintas San Isidro, Torreón.</p>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.9288049264237!2d-103.41484129999999!3d25.574035300000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdbfcc9027e75%3A0xb479075e388c5b8a!2sRinc%C3%B3n%20Silverio!5e0!3m2!1ses!2smx!4v1764105257733!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- Botón Principal (Enlace Actualizado) -->
+        <div class="cta-container">
+            <a href="https://wa.link/5tmk0s" target="_blank" class="main-btn">Confirmar asistencia</a>
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-fink-purple text-white text-center py-6 px-4 text-sm mt-auto z-10 relative">
-        <p>&copy; 2025 Finkpital. Trademarks and brands are the property of their respective owners.</p>
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Finkpital Trademarks and brands are the property of their respective owners.</p>
     </footer>
 
-    <!-- BOTÓN FLOTANTE DE UBICACIÓN (VERDE) -->
-    <a href="https://www.google.com/maps/dir/?api=1&destination=Rincon+Silverio%2C+Plaza+Paseo+Independencia%2C+Blvd.+Las+Quintas+50%2C+Quintas+San+Isidro%2C+Torreon" 
-       target="_blank" 
-       title="Cómo llegar"
-       class="fixed bottom-6 left-6 z-50 bg-fink-green text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:bg-[#8ab31b] transition-all duration-300 border-2 border-white">
-        <!-- Icono de Pin de Mapa -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
+    <!-- Botón Flotante -->
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Rincon+Silverio%2C+Plaza+Paseo+Independencia%2C+Blvd.+Las+Quintas+50%2C+Quintas+San+Isidro%2C+Torreon" target="_blank" class="float-btn" title="Cómo llegar">
+        <i class="fa-solid fa-location-dot"></i>
     </a>
 
-    <!-- LÓGICA DE LA CUENTA REGRESIVA -->
+    <!-- Script de Cuenta Regresiva -->
     <script>
-        // FECHA OBJETIVO: 19 de Diciembre de 2025 a las 14:00
-        const targetDate = new Date("December 19, 2025 14:00:00").getTime();
+        const targetDate = new Date("Dec 19, 2025 14:00:00").getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
-            // Cálculos matemáticos
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Funciones auxiliares para actualizar el DOM
-            const updateElement = (id, value) => {
-                const el = document.getElementById(id);
-                if(el) el.innerHTML = value < 10 ? "0" + value : value;
-            };
+            document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
 
-            updateElement("days", days);
-            updateElement("hours", hours);
-            updateElement("minutes", minutes);
-            updateElement("seconds", seconds);
-
-            // Cuando la cuenta termina
             if (distance < 0) {
                 clearInterval(timer);
-                ["days", "hours", "minutes", "seconds"].forEach(id => {
-                    const el = document.getElementById(id);
-                    if(el) el.innerHTML = "00";
-                });
+                document.querySelector('.countdown-container').innerHTML = "<h2 style='color:var(--morado); text-align:center;'>¡El evento ha comenzado!</h2>";
             }
         }, 1000);
     </script>
